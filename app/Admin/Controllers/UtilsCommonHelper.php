@@ -81,23 +81,7 @@ class UtilsCommonHelper
                 ->where('type', 'Status')
                 ->where('value', $result)
                 ->first();
-        } elseif ($group === "Reply") {
-            $commonCode = CommonCodeModel::where('group', $group)
-                ->where('type', 'Status')
-                ->where('value', $result)
-                ->first();
-        } elseif ($group === "Highlight") {
-            $commonCode = CommonCodeModel::where('group', $group)
-                ->where('type', 'Status')
-                ->where('value', $result)
-                ->first();
-        } elseif ($group === "Product") {
-            $commonCode = CommonCodeModel::where('group', $group)
-                ->where('type', 'FreeShip')
-                ->where('value', $result)
-                ->first();
-        } else {
-            //TODO: CHECK lai
+        }  else {
             $commonCode = CommonCodeModel::where('group', $group)
                 ->where('type', 'Status')
                 ->where('value', $result)
