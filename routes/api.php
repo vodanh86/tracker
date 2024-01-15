@@ -1,8 +1,8 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,3 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::apiResource('users', UserController::class);
+
+//user
+Route::get('/user/get-other-user', 'UserController@getOtherUsers');
+Route::get('/user-list/get-remain-user', 'UserController@getRemainUsers');

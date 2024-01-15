@@ -14,5 +14,9 @@ Route::group([
 ], function (Router $router) {
 
     $router->get('/', 'HomeController@index')->name('home');
+    $router->resource('/alerts', AAlertController::class);
+    $router->resource('/user-friends', AUserFriendController::class);
+    $router->resource('/history-locations', AHistoryLocationController::class);
+    $router->resource('/zones', AZoneController::class);
 
 });
