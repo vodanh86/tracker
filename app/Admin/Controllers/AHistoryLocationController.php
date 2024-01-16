@@ -33,8 +33,8 @@ class AHistoryLocationController extends AdminController
         $grid->column('location_name', __('Địa điểm'))->filter('like');
         $grid->column('datetime', __('Thời gian'))->vndate()->filter('range', 'date');
 
-        $grid->column('created_at', __('Ngày tạo'))->vndate();
-        $grid->column('updated_at', __('Ngày cập nhật'))->vndate();
+        $grid->column('created_at', trans('admin.created_at'))->vndate();
+        $grid->column('updated_at', trans('admin.updated_at'))->vndate();
 
         $grid->model()->orderBy('created_at', 'desc');
         $grid->disableFilter();

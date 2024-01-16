@@ -5,6 +5,7 @@ namespace App\Admin\Controllers;
 use App\Models\BranchModel;
 use App\Models\BusinessModel;
 use App\Models\CategoryModel;
+use App\Models\CommonCode;
 use App\Models\CommonCodeModel;
 use App\Models\ProductGroupModel;
 use App\Models\ProductModel;
@@ -18,20 +19,10 @@ class UtilsCommonHelper
 {
     public static function commonCode($group, $type, $description, $value)
     {
-        if ($group === "Core") {
-            return CommonCodeModel::where('group', $group)
-                ->where('type', $type)
-                ->pluck($description, $value);
-        } elseif ($group === "Communication") {
-            return CommonCodeModel::where('group', $group)
-                ->where('type', $type)
-                ->pluck($description, $value);
-        } else {
-            $commonCode = CommonCodeModel::where('group', $group)
-                ->where('type', $type)
-                ->pluck($description, $value);
-            return $commonCode;
-        }
+        $commonCode = CommonCodeModel::where('group', $group)
+            ->where('type', $type)
+            ->pluck($description, $value);
+        return $commonCode;
     }
 
     public static function listAllUser()
@@ -67,17 +58,11 @@ class UtilsCommonHelper
     public static function statusFormatter($value, $group, $isGrid)
     {
         $result = $value ? $value : 0;
-        if ($group === "Core") {
-            $commonCode = CommonCodeModel::where('group', $group)
+
+        $commonCode = CommonCodeModel::where('group', $group)
                 ->where('type', 'Status')
                 ->where('value', $result)
                 ->first();
-        } else {
-            $commonCode = CommonCodeModel::where('group', $group)
-                ->where('type', 'Status')
-                ->where('value', $result)
-                ->first();
-        }
         if ($commonCode && $isGrid === "grid") {
             return $result === 1 ? "<span class='label label-success'>$commonCode->description_vi</span>" : "<span class='label label-danger'>$commonCode->description_vi</span>";
         }
@@ -161,6 +146,7 @@ class UtilsCommonHelper
         $string = strtolower($string);
         return $string;
     }
+
 
 
 }

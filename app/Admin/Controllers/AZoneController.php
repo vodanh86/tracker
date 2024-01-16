@@ -37,8 +37,8 @@ class AZoneController extends AdminController
         $grid->column('status', __('Trạng thái'))->display(function ($status) {
             return UtilsCommonHelper::statusFormatter($status, "Core", "grid");
         });
-        $grid->column('created_at', __('Ngày tạo'))->vndate();
-        $grid->column('updated_at', __('Ngày cập nhật'))->vndate();
+        $grid->column('created_at', trans('admin.created_at'))->vndate();
+        $grid->column('updated_at', trans('admin.updated_at'))->vndate();
         $grid->model()->orderBy('created_at', 'desc');
         $grid->disableFilter();
         $grid->fixColumns(0, -1);
@@ -59,18 +59,17 @@ class AZoneController extends AdminController
         $show->field('lat', __('Lat'));
         $show->field('long', __('Long'));
         $show->field('alert', __('Cảnh báo'));
-
-        $show->field('status', __('Trạng thái'))->display(function ($status) {
-            return UtilsCommonHelper::statusFormatter($status, "Core", "grid");
+        $show->field('status', __('Trạng thái'))->as(function ($status) {
+            return UtilsCommonHelper::statusFormatter($status, "Core", null);
         });
         $show->field('created_at', __('Ngày tạo'))->vndate();
         $show->field('updated_at', __('Ngày cập nhật'))->vndate();
 
 //        $show->panel()
 //            ->tools(function ($tools) {
-////                $tools->disableEdit();
-////                $tools->disableList();
-////                $tools->disableDelete();
+//                $tools->disableEdit();
+//                $tools->disableList();
+//                $tools->disableDelete();
 //            });
         return $show;
     }
