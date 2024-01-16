@@ -30,8 +30,8 @@ class AZoneController extends AdminController
         $grid = new Grid(new ZoneModel());
         $grid->column('user.name', __('Tên người dùng'))->filter('like');
         $grid->column('friend.name', __('Tên bạn'))->filter('like');
-        $grid->column('lat', __('Lat'));
-        $grid->column('long', __('Long'));
+        $grid->column('lat', __('Latitude'));
+        $grid->column('long', __('Longtitude'));
         $grid->column('alert', __('Cảnh báo'));
 
         $grid->column('status', __('Trạng thái'))->display(function ($status) {
@@ -56,8 +56,8 @@ class AZoneController extends AdminController
         $show = new Show(ZoneModel::findOrFail($id));
         $show->field('user.name', __('Tên người dùng'));
         $show->field('friend.name', __('Tên bạn'));
-        $show->field('lat', __('Lat'));
-        $show->field('long', __('Long'));
+        $show->field('lat', __('Latitude'));
+        $show->field('long', __('Longtitude'));
         $show->field('alert', __('Cảnh báo'));
         $show->field('status', __('Trạng thái'))->as(function ($status) {
             return UtilsCommonHelper::statusFormatter($status, "Core", null);
@@ -102,8 +102,8 @@ class AZoneController extends AdminController
             $form->select('user_id', __('Tên người dùng'))->options($userOption)->required();
             $form->select('friend_id', __('Tên bạn'))->options()->required()->disable();
         }
-        $form->number('lat', __('Lat'));
-        $form->number('long', __('Long'));
+        $form->number('lat', __('Latitude'));
+        $form->number('long', __('Longtitude'));
         $form->number('alert', __('Cảnh báo'));
         $form->select('status', __('Trạng thái'))->options($statusOptions)->default($statusDefault);
 

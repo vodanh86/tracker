@@ -55,8 +55,8 @@ class AUserFriendController extends AdminController
         $show->field('friend.name', __('Tên bạn'));
         $show->field('nickname', __('NickName'));
 
-        $show->field('status', __('Trạng thái'))->display(function ($status) {
-            return UtilsCommonHelper::statusFormatter($status, "Core", "grid");
+        $show->field('status', __('Trạng thái'))->as(function ($status) {
+            return UtilsCommonHelper::statusFormatter($status, "Core", null);
         });
         $show->field('created_at', __('Ngày tạo'))->vndate();
         $show->field('updated_at', __('Ngày cập nhật'))->vndate();

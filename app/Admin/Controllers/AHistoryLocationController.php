@@ -29,7 +29,7 @@ class AHistoryLocationController extends AdminController
         $grid = new Grid(new HistoryLocationModel());
         $grid->column('user.name', __('Tên người dùng'))->filter('like');
         $grid->column('lat', __('Lat'));
-        $grid->column('long', __('Long'));
+        $grid->column('long', __('Longtitude'));
         $grid->column('location_name', __('Địa điểm'))->filter('like');
         $grid->column('datetime', __('Thời gian'))->vndate()->filter('range', 'date');
 
@@ -58,7 +58,7 @@ class AHistoryLocationController extends AdminController
         $show = new Show(HistoryLocationModel::findOrFail($id));
         $show->field('user.name', __('Tên người dùng'));
         $show->field('lat', __('Lat'));
-        $show->field('long', __('Long'));
+        $show->field('long', __('Longtitude'));
         $show->field('location_name', __('Địa điểm'));
         $show->field('datetime', __('Thời gian'))->vndate();
         $show->field('created_at', __('Ngày tạo'))->vndate();
@@ -92,7 +92,7 @@ class AHistoryLocationController extends AdminController
             $form->select('user_id', __('Tên người dùng'))->options($userOption)->required();
         }
         $form->number('lat', __('Lat'))->required();
-        $form->number('long', __('Long'));
+        $form->number('long', __('Longtitude'));
         $form->text('location_name', __('Địa điểm'));
         $form->datetime('datetime', __('Thời gian'));
 
