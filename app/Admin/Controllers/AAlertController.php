@@ -29,19 +29,13 @@ class AAlertController extends AdminController
         $grid->column('user.name', __('Tên người dùng'))->filter('like');
         $grid->column('friend.name', __('Tên bạn'))->filter('like');
         $grid->column('zone.id', __('Địa điểm'))->filter('like');
-        $grid->column('happened_at', __('Thời điểm xảy ra'))->display(function ($createdAt) {
-            return ConstantHelper::dateFormatter($createdAt);
-        });
+        $grid->column('happened_at', __('Thời điểm xảy ra'))->vndate();
 
 //        $grid->column('status', __('Trạng thái'))->display(function ($status) {
 //            return UtilsCommonHelper::statusFormatter($status, "Core", "grid");
 //        });
-        $grid->column('created_at', __('Ngày tạo'))->display(function ($createdAt) {
-            return ConstantHelper::dateFormatter($createdAt);
-        });
-        $grid->column('updated_at', __('Ngày cập nhật'))->display(function ($updatedAt) {
-            return ConstantHelper::dateFormatter($updatedAt);
-        });
+        $grid->column('created_at', __('Ngày tạo'))->vndate();
+        $grid->column('updated_at', __('Ngày cập nhật'))->vndate();
         $grid->model()->orderBy('created_at', 'desc');
         $grid->disableFilter();
         $grid->fixColumns(0, -1);
@@ -60,15 +54,9 @@ class AAlertController extends AdminController
         $show->field('user.name', __('Tên người dùng'));
         $show->field('friend.name', __('Tên bạn'));
         $show->field('zone.name', __('Địa điểm'));
-        $show->field('happened_at', __('Thời điểm xảy ra'))->display(function ($createdAt) {
-            return ConstantHelper::dateFormatter($createdAt);
-        });
-        $show->field('created_at', __('Ngày tạo'))->display(function ($createdAt) {
-            return ConstantHelper::dateFormatter($createdAt);
-        });
-        $show->field('updated_at', __('Ngày cập nhật'))->display(function ($createdAt) {
-            return ConstantHelper::dateFormatter($createdAt);
-        });
+        $show->field('happened_at', __('Thời điểm xảy ra'))->vndate();
+        $show->field('created_at', __('Ngày tạo'))->vndate();
+        $show->field('updated_at', __('Ngày cập nhật'))->vndate();
         return $show;
     }
 

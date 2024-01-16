@@ -15,6 +15,7 @@ class ConstantHelper
         $carbonDateIn = Carbon::parse($dateIn)->setTimezone('Asia/Bangkok');
         return $carbonDateIn->format('d/m/Y - H:i:s');
     }
+
     public static function dayFormatter($dayIn)
     {
         if ($dayIn === null) {
@@ -55,14 +56,7 @@ class ConstantHelper
     {
         return number_format($money, 0, ',', ',') . " VND";
     }
-//    public static function transactionDetailRecordStatus($value)
-//    {
-//        if (array_key_exists($value, Constant::RECORD_STATUS)) {
-//            return Constant::RECORD_STATUS[$value];
-//        } else {
-//            return '';
-//        }
-//    }
+
     public static function transactionGridRecordStatus($value)
     {
         if ($value === 0) {
@@ -75,4 +69,6 @@ class ConstantHelper
             return "<span class='label label-default'>Lịch sử</span>";
         }
     }
+
+
 }

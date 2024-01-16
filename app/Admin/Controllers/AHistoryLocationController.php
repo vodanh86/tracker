@@ -31,24 +31,19 @@ class AHistoryLocationController extends AdminController
         $grid->column('lat', __('Lat'));
         $grid->column('long', __('Long'));
         $grid->column('location_name', __('Địa điểm'))->filter('like');
-        $grid->column('datetime', __('Thời gian'))->filter('range', 'date');
+        $grid->column('datetime', __('Thời gian'))->vndate()->filter('range', 'date');
 
-        $grid->column('created_at', __('Ngày tạo'))->display(function ($createdAt) {
-            return ConstantHelper::dateFormatter($createdAt);
-        });
-        $grid->column('updated_at', __('Ngày cập nhật'))->display(function ($updatedAt) {
-            return ConstantHelper::dateFormatter($updatedAt);
-        });
+        $grid->column('created_at', __('Ngày tạo'))->vndate();
+        $grid->column('updated_at', __('Ngày cập nhật'))->vndate();
 
         $grid->model()->orderBy('created_at', 'desc');
         $grid->disableFilter();
-        $grid->actions(function ($actions) {
-            $blockDelete = $actions->row->block_delete;
-            if ($blockDelete === 1) {
-                $actions->disableDelete();
-            }
-        });
         $grid->fixColumns(0, -1);
+        $grid->actions(function ($actions) {
+            $actions->disableDelete();
+//            $actions->disableEdit();
+//            $actions->disableView();
+        });
         return $grid;
     }
 
@@ -65,14 +60,16 @@ class AHistoryLocationController extends AdminController
         $show->field('lat', __('Lat'));
         $show->field('long', __('Long'));
         $show->field('location_name', __('Địa điểm'));
-        $show->field('datetime', __('Thời gian'));
+        $show->field('datetime', __('Thời gian'))->vndate();
+        $show->field('created_at', __('Ngày tạo'))->vndate();
+        $show->field('updated_at', __('Ngày cập nhật'))->vndate();
 
-        $show->field('created_at', __('Ngày tạo'))->display(function ($createdAt) {
-            return ConstantHelper::dateFormatter($createdAt);
-        });
-        $show->field('updated_at', __('Ngày cập nhật'))->display(function ($createdAt) {
-            return ConstantHelper::dateFormatter($createdAt);
-        });
+        $show->panel()
+            ->tools(function ($tools) {
+//                $tools->disableEdit();
+//                $tools->disableList();
+                $tools->disableDelete();
+            });
         return $show;
     }
 

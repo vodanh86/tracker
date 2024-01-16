@@ -42,7 +42,7 @@ class UtilsCommonHelper
     public static function listAllUserWithoutCurrentUser($currentUser)
     {
         if ($currentUser !== null) {
-            return User::where("id",'!=', $currentUser)->pluck('name', 'id');
+            return User::where("id", '!=', $currentUser)->pluck('name', 'id');
         }
         return User::all()->pluck('name', 'id');
     }
@@ -62,15 +62,6 @@ class UtilsCommonHelper
         return $commonCode ? $commonCode->$description : '';
     }
 
-//    public static function findAllProductGroup()
-//    {
-//        return ProductGroupModel::all()->where('status', 1)->pluck('name', 'id');
-//    }
-//
-//    public static function findAllProduct()
-//    {
-//        return ProductModel::all()->where('status', 1)->pluck('name', 'id');
-//    }
 
     //Kiem tra ten lai(doi lai)
     public static function statusFormatter($value, $group, $isGrid)
@@ -81,34 +72,15 @@ class UtilsCommonHelper
                 ->where('type', 'Status')
                 ->where('value', $result)
                 ->first();
-        }  else {
+        } else {
             $commonCode = CommonCodeModel::where('group', $group)
                 ->where('type', 'Status')
                 ->where('value', $result)
                 ->first();
         }
         if ($commonCode && $isGrid === "grid") {
-            if ($group === 'Reply') {
-                switch ($result) {
-                    case 0:
-                        $result = "<span class='label label-danger'>$commonCode->description_vi</span>";
-                        break;
-                    case 1:
-                        $result = "<span class='label label-warning'>$commonCode->description_vi</span>";
-                        break;
-                    case 2:
-                        $result = "<span class='label label-success'>$commonCode->description_vi</span>";
-                        break;
-                    case 3:
-                        $result = "<span class='label ' style='background-color: #97a0b3'>$commonCode->description_vi</span>";
-                        break;
-                }
-                return $result;
-            } else {
-                return $result === 1 ? "<span class='label label-success'>$commonCode->description_vi</span>" : "<span class='label label-danger'>$commonCode->description_vi</span>";
-            }
+            return $result === 1 ? "<span class='label label-success'>$commonCode->description_vi</span>" : "<span class='label label-danger'>$commonCode->description_vi</span>";
         }
-
 
         return $commonCode->description_vi;
     }
