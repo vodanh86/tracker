@@ -43,26 +43,14 @@ class UtilsCommonHelper
         return ZoneModel::all()->pluck('id', 'id');
     }
 
-    public static function commonCodeGridFormatter($group, $type, $description, $value)
-    {
-        $commonCode = CommonCodeModel::where('business_id', Admin::user()->business_id)
-            ->where('group', $group)
-            ->where('type', $type)
-            ->where('value', $value)
-            ->first();
-        return $commonCode ? $commonCode->$description : '';
-    }
-
-
-    //Kiem tra ten lai(doi lai)
     public static function statusFormatter($value, $group, $isGrid)
     {
         $result = $value ? $value : 0;
 
         $commonCode = CommonCodeModel::where('group', $group)
-                ->where('type', 'Status')
-                ->where('value', $result)
-                ->first();
+            ->where('type', 'Status')
+            ->where('value', $result)
+            ->first();
         if ($commonCode && $isGrid === "grid") {
             return $result === 1 ? "<span class='label label-success'>$commonCode->description_vi</span>" : "<span class='label label-danger'>$commonCode->description_vi</span>";
         }
@@ -79,26 +67,10 @@ class UtilsCommonHelper
         return $value;
     }
 
-    public static function statusFormFormatter()
-    {
-        return self::commonCode("Core", "Status", "description_vi", "value");
-    }
-
-    public static function statusGridFormatter($status)
-    {
-        return self::statusFormatter($status, "Core", "grid");
-    }
-
-    public static function statusDetailFormatter($status)
-    {
-        return self::statusFormatter($status, "Core", "detail");
-    }
-
-
     public static function generateTransactionId($type)
     {
         $today = date("ymd");
-        $currentTime = Carbon::now('Asia/Bangkok');
+        $currentTime = Carbon::now(Config::get('app.timezone'));
         $time = $currentTime->format('His');
         $userId = Str::padLeft(Admin::user()->id, 6, '0');
         $code = $type . $today . $userId . $time;
@@ -146,7 +118,6 @@ class UtilsCommonHelper
         $string = strtolower($string);
         return $string;
     }
-
 
 
 }
