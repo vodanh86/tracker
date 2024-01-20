@@ -23,3 +23,6 @@ Route::apiResource('users', UserController::class);
 //user
 Route::get('/user/get-other-user', 'UserController@getOtherUsers');
 Route::get('/user-list/get-remain-user', 'UserController@getRemainUsers');
+
+//alert
+Route::get('/alert/get-by-user/{id}', 'AlertController@getByUser');
