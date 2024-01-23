@@ -122,7 +122,7 @@ class ZoneController extends Controller
                 'zo.name',
                 'us1.name as `userName`',
                 'us2.name as `friendName`')
-            ->join('users as us1', 'us.id', '=', 'zo.user_id')
+            ->join('users as us1', 'us1.id', '=', 'zo.user_id')
             ->join('users as us2', 'us2.id', '=', 'zo.friend_id')
             ->orderBy('zo.updated_at', 'DESC')
             ->get();
