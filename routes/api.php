@@ -59,3 +59,12 @@ Route::get('/user-friend/get-by-id/{id}', 'UserFriendController@show');
 Route::delete('/user-friend/delete/{id}', 'UserFriendController@destroy');
 Route::get('/user-friend/get-list-friend-by-user/{id}', 'UserFriendController@getListFriends');
 Route::get('/user-friend/all', 'UserFriendController@index');
+
+//share-code
+Route::post('/share-code/create', 'ShareCodeController@store');
+Route::put('/share-code/update/{id}', 'ShareCodeController@update');
+Route::patch('/share-code/update/{id}', 'ShareCodeController@update');
+Route::get('/share-code/get-by-id/{id}', 'ShareCodeController@show');
+Route::delete('/share-code/delete/{id}', 'ShareCodeController@destroy');
+Route::get('/share-code/all', 'ShareCodeController@index');
+Route::get('/share-code/get-by-user/{id}', 'ShareCodeController@getByUser');
