@@ -44,7 +44,7 @@ class ZoneController extends Controller
     public function store(Request $request)
     {
         $zone = ZoneModel::create($request->all());
-        $response = $this->_formatBaseResponse(200, $zone, 'Lấy dữ liệu thành công');
+        $response = $this->_formatBaseResponse(201, $zone, 'Tạo mới zone thành công');
         return response()->json($response);
     }
 
@@ -83,7 +83,7 @@ class ZoneController extends Controller
     {
         $zone = ZoneModel::findOrFail($id);
         $zone->update($request->all());
-        $response = $this->_formatBaseResponse(200, $zone, 'Lấy dữ liệu thành công');
+        $response = $this->_formatBaseResponse(200, $zone, 'Cập nhật dữ liệu thành công');
         return response()->json($response);
     }
 

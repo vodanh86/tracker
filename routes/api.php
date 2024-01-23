@@ -26,6 +26,12 @@ Route::get('/user-list/get-remain-user', 'UserController@getRemainUsers');
 
 //alerts
 Route::get('/alert/get-by-user/{id}', 'AlertController@getByUser');
+Route::post('/alert/create', 'AlertController@store');
+Route::put('/alert/update/{id}', 'AlertController@update');
+Route::patch('/alert/update/{id}', 'AlertController@update');
+Route::get('/alert/get-by-id/{id}', 'AlertController@show');
+Route::delete('/alert/delete/{id}', 'AlertController@destroy');
+Route::get('/alert/all', 'AlertController@index');
 
 //zones
 Route::post('/zone/create', 'ZoneController@store');

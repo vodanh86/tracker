@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AlertModel;
+use App\Models\ZoneModel;
 use App\Traits\ResponseFormattingTrait;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -13,11 +16,14 @@ class AlertController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
-        //
+        $alerts = AlertModel::all();
+        $total = $alerts->count();
+        $response = $this->_formatBaseResponseWithTotal(200, $alerts, $total, 'Lấy dữ liệu thành công');
+        return response()->json($response);
     }
 
     /**
@@ -38,7 +44,9 @@ class AlertController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $alert = AlertModel::create($request->all());
+        $response = $this->_formatBaseResponse(201, $alert, 'Tạo mới cảnh báo thành công');
+        return response()->json($response);
     }
 
     /**
@@ -49,7 +57,9 @@ class AlertController extends Controller
      */
     public function show($id)
     {
-        //
+        $alert = AlertModel::find($id);
+        $response = $this->_formatBaseResponse(200, $alert, 'Lấy dữ liệu thành công');
+        return response()->json($response);
     }
 
     /**
@@ -68,22 +78,33 @@ class AlertController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, $id)
     {
-        //
+        $alert = AlertModel::findOrFail($id);
+        $alert->update($request->all());
+        $response = $this->_formatBaseResponse(200, $alert, 'Cập nhật dữ liệu thành công');
+        return response()->json($response);
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy($id)
     {
-        //
+        try {
+            $alert = AlertModel::findOrFail($id);
+            $alert->delete();
+        } catch (Exception $e) {
+            $response = $this->_formatBaseResponse(400, $e, "Xoá dữ liệu thất bại");
+            return response()->json($response);
+        }
+        $response = $this->_formatBaseResponse(204, $alert, 'Xoá dữ liệu thành công');
+        return response()->json($response);
     }
 
     /**
@@ -94,8 +115,6 @@ class AlertController extends Controller
      */
     public function getByUser($id)
     {
-
-//        $perPage = $request->input('limit', 10);
         $alert = DB::table('alerts as p')
             ->select('p.id',
                 'p.name AS alertName',
