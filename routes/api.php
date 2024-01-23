@@ -41,3 +41,12 @@ Route::get('/zone/get-by-id/{id}', 'ZoneController@show');
 Route::delete('/zone/delete/{id}', 'ZoneController@destroy');
 Route::get('/zone/get-all', 'ZoneController@getAllZones');
 Route::get('/zone/all', 'ZoneController@index');
+
+//history-location
+Route::post('/history-location/create', 'HistoryLocationController@store');
+Route::put('/history-location/update/{id}', 'HistoryLocationController@update');
+Route::patch('/history-location/update/{id}', 'HistoryLocationController@update');
+Route::get('/history-location/get-by-id/{id}', 'HistoryLocationController@show');
+Route::delete('/history-location/delete/{id}', 'HistoryLocationController@destroy');
+Route::get('/history-location/get-by-user/{id}', 'HistoryLocationController@getByUser');
+Route::get('/history-location/all', 'HistoryLocationController@index');
