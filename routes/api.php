@@ -24,5 +24,14 @@ Route::apiResource('users', UserController::class);
 Route::get('/user/get-other-user', 'UserController@getOtherUsers');
 Route::get('/user-list/get-remain-user', 'UserController@getRemainUsers');
 
-//alert
+//alerts
 Route::get('/alert/get-by-user/{id}', 'AlertController@getByUser');
+
+//zones
+Route::post('/zone/create', 'ZoneController@store');
+Route::put('/zone/update/{id}', 'ZoneController@update');
+Route::patch('/zone/update/{id}', 'ZoneController@update');
+Route::get('/zone/get-by-id/{id}', 'ZoneController@show');
+Route::delete('/zone/delete/{id}', 'ZoneController@destroy');
+Route::get('/zone/get-all', 'ZoneController@getAllZones');
+Route::get('/zone/all', 'ZoneController@index');
