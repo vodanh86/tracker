@@ -7,6 +7,7 @@ use App\Traits\ResponseFormattingTrait;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class ShareCodeController extends Controller
 {
@@ -43,7 +44,13 @@ class ShareCodeController extends Controller
      */
     public function store(Request $request)
     {
-        $shareCodes = ShareCodeModel::create($request->all());
+        $code = Str::uuid();
+
+        $data = $request->all();
+        $data['code'] = $code;
+
+        $shareCodes = ShareCodeModel::create($data);
+//        $shareCodes = ShareCodeModel::create($request->all());
         $response = $this->_formatBaseResponse(201, $shareCodes, 'Tạo mới mã code thành công');
         return response()->json($response);
     }
