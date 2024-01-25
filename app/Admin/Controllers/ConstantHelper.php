@@ -12,7 +12,7 @@ class ConstantHelper
             return "";
         }
 
-        $carbonDateIn = Carbon::parse($dateIn)->setTimezone('Asia/Bangkok');
+        $carbonDateIn = Carbon::parse($dateIn)->setTimezone(Config::get('app.timezone'));
         return $carbonDateIn->format('d/m/Y - H:i:s');
     }
 
@@ -22,7 +22,7 @@ class ConstantHelper
             return "";
         }
 
-        $carbonDayIn = Carbon::parse($dayIn)->setTimezone('Asia/Bangkok');
+        $carbonDayIn = Carbon::parse($dayIn)->setTimezone(Config::get('app.timezone'));
         return $carbonDayIn->format('d/m/Y');
     }
     public static function dayHightLightFormatter($dayIn, $type)
@@ -30,7 +30,7 @@ class ConstantHelper
         if ($dayIn === null) {
             return "";
         }
-        $carbonDayIn = Carbon::parse($dayIn)->setTimezone('Asia/Bangkok');
+        $carbonDayIn = Carbon::parse($dayIn)->setTimezone(Config::get('app.timezone'));
         $today = Carbon::now('Asia/Bangkok');
         if ($type == "nextDate") {
             if ($carbonDayIn->greaterThan($today)) {
